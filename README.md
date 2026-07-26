@@ -11,6 +11,10 @@
   <img src="https://img.shields.io/badge/ONNX%20Runtime-005CED?style=flat-square&logo=onnx&logoColor=white">
 </p>
 
+<p align="center">
+  <img src="assets/pipeline.png" alt="SortSense pipeline: detect, gate, classify, decide, log" width="100%">
+</p>
+
 ---
 
 SortSense is an end-to-end pipeline that turns a single camera frame into a sorting decision &mdash; object detection, waste-category classification, and a cost-aware policy that decides whether to trust the prediction or reject it &mdash; designed to run fully on-device on embedded hardware (Jetson-class SBCs), with no cloud round-trip required for the sorting decision itself.
