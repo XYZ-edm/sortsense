@@ -143,7 +143,36 @@ The full dataset was audited for label noise and corrections were applied by han
 
 Every module has direct-assert tests, run with one command. No pytest dependency &mdash; a single script discovers and runs every `test_*.py` module and reports pass/fail counts, intentionally simple so it is obvious what is and is not covered.
 
+The **16 / 16** figure is that suite in the full private repository. What ships *here* is one of those tests, runnable standalone (see [Code you can actually read](#code-you-can-actually-read) below), so the style of the testing is inspectable rather than merely asserted.
+
 </details>
+
+---
+
+## Code you can actually read
+
+Architecture diagrams are cheap. `showcase/` contains standalone, dependency-free versions of three pieces of the pipeline where the engineering decision is the interesting part &mdash; readable in a few minutes each, with the calibrated constants stripped out and said so in the docstring:
+
+| File | What it shows |
+|---|---|
+| [`decision_policy.py`](showcase/decision_policy.py) | The asymmetric per-class threshold pattern &mdash; the *shape* of the solution, without the calibrated numbers |
+| [`box_stability_tracker.py`](showcase/box_stability_tracker.py) | The temporal gate: one crop released per episode, only once the box holds still |
+| [`camera_reconnect.py`](showcase/camera_reconnect.py) | Bounded exponential-backoff reconnection, with no leaked handles on the failure path |
+
+The last one ships with its tests, and they run on a clean Python 3 with nothing installed:
+
+```bash
+python3 showcase/test_camera_reconnect.py
+```
+
+```
+>>> PASS: succeeds on second attempt, correct exponential backoff
+>>> PASS: dead handle released before retry, no leaked handles
+>>> PASS: all attempts exhausted -> None, no abandoned handles
+>>> 3/3 TEST PASS
+```
+
+Note what is being tested: not the happy path, but handle leaks and exhausted retries &mdash; injected fakes stand in for the camera, which is why the failure paths can be exercised at all.
 
 ---
 
