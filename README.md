@@ -23,6 +23,30 @@ This repository is a curated, from-scratch write-up of the system's architecture
 
 ---
 
+## Why this exists
+
+Recycling contamination &mdash; the wrong material in the wrong bin &mdash; is one of the main reasons collected waste ends up in landfill instead of being recycled. A sorting assistant that gives real-time feedback at the point of disposal, *before* contamination happens, is cheap to deploy compared to sorting-facility infrastructure, and can run on low-cost embedded hardware.
+
+---
+
+## Getting started
+
+**Just want to see real code run, no setup?**
+
+```bash
+git clone https://github.com/XYZ-edm/sortsense.git
+cd sortsense
+python3 showcase/test_camera_reconnect.py
+```
+
+Three tests, standard library only, no dependencies to install &mdash; see [Code you can actually read](#code-you-can-actually-read) below for what it's actually checking.
+
+**Want the full picture first?** Keep scrolling: [Results](#results) has the numbers, [Architecture](#architecture) has the pipeline shape, and [Engineering notes](#engineering-notes) has the decisions behind it.
+
+**Company or researcher interested in a field trial or collaboration?** Reach out &mdash; contact details are on the [profile README](https://github.com/XYZ-edm).
+
+---
+
 ## Results
 
 | Measurement | Value |
@@ -36,12 +60,6 @@ This repository is a curated, from-scratch write-up of the system's architecture
 | Unattended camera loop | 3000-frame soak, no sustained RSS growth |
 
 All figures come from my own held-out evaluation, not a public benchmark. See [Known limits](#known-limits) before reading too much into them.
-
----
-
-## Why this exists
-
-Recycling contamination &mdash; the wrong material in the wrong bin &mdash; is one of the main reasons collected waste ends up in landfill instead of being recycled. A sorting assistant that gives real-time feedback at the point of disposal, *before* contamination happens, is cheap to deploy compared to sorting-facility infrastructure, and can run on low-cost embedded hardware.
 
 ---
 
